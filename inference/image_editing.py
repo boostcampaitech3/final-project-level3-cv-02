@@ -2,6 +2,7 @@ import os
 import numpy as np
 from tqdm import tqdm
 import PIL
+import urllib.request
 
 import torch
 import torchvision.utils as tvu
@@ -71,6 +72,14 @@ def extract_mask(input_original, input_sketch):
     return img_sketch_tensor, mask_tensor
 
 
+def download_image(origin):
+    file_name = origin.split('/')[-1]
+    if '?' in file_name:
+        file_name = file_name.split('?')[0]
+    urllib.request.urlretrieve(origin, file_name)
+    return file_name
+
+
 class Diffusion(object):
     def __init__(self, args, config, device=None):
         self.args = args
@@ -120,13 +129,16 @@ class Diffusion(object):
         print("Model loaded")
         ckpt_id = 0
 
-        # download_process_data(path="colab_demo")
         n = self.config.sampling.batch_size
         model.eval()
         print("Start sampling")
         with torch.no_grad():
-            # name = self.args.npy_name
-            # [mask, img] = torch.load("colab_demo/{}.pth".format(name))
+            # If images are not in local, download them
+            if 'http' in path1:
+                path1 = download_image(path1)
+            if 'http' in path2:
+                path2 = download_image(path2)
+
             img, mask = extract_mask(input_original=path1, input_sketch=path2)
 
             mask = mask.to(self.config.device)
