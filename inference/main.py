@@ -8,20 +8,19 @@ import os
 import torch
 import numpy as np
 
-from runners.image_editing import Diffusion
+from image_editing import Diffusion
 
 
 def parse_args_and_config():
     parser = argparse.ArgumentParser(description=globals()['__doc__'])
-    parser.add_argument('--config', type=str, required=True, help='Path to the config file')
+    parser.add_argument('--config', type=str, default='bedroom.yml', help='Path to the config file')
     parser.add_argument('--seed', type=int, default=1234, help='Random seed')
-    parser.add_argument('--exp', type=str, default='exp', help='Path for saving running related data.')
+    parser.add_argument('--exp', type=str, default='./runs/', help='Path for saving running related data.')
     parser.add_argument('--comment', type=str, default='', help='A string for experiment comment')
     parser.add_argument('--verbose', type=str, default='info', help='Verbose level: info | debug | warning | critical')
-    parser.add_argument('--sample', action='store_true', help='Whether to produce samples from the model')
+    parser.add_argument('--sample', default=True, action='store_true', help='Whether to produce samples from the model')
     parser.add_argument('-i', '--image_folder', type=str, default='images', help="The folder name of samples")
-    parser.add_argument('--ni', action='store_true', help="No interaction. Suitable for Slurm Job launcher")
-    parser.add_argument('--npy_name', type=str, required=True)
+    parser.add_argument('--ni', default=True, action='store_true', help="No interaction. Suitable for Slurm Job launcher")
     parser.add_argument('--sample_step', type=int, default=3, help='Total sampling steps')
     parser.add_argument('--t', type=int, default=400, help='Sampling noise scale')
     parser.add_argument('--path1', type=str, default='/opt/ml/workspace/input/indoor_test_1_rescaled_512.png', help='Original image path')

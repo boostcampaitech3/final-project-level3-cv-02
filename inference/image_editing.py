@@ -8,8 +8,7 @@ import torch
 import torchvision.utils as tvu
 from torchvision.transforms import transforms
 
-from models.diffusion import Model
-from functions.process_data import *
+from diffusion import Model
 
 
 def get_beta_schedule(*, beta_start, beta_end, num_diffusion_timesteps):
