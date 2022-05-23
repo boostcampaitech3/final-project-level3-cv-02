@@ -1,0 +1,64 @@
+.Upload-background {
+    background-color: rgb(255, 255, 255);
+    height: 90vh;
+    text-align: center;
+}
+
+.Upload-title {
+    position: relative;
+    top: 10%;
+}
+
+.Upload-form {
+    display: inline-block;
+    /* background-color: brown; */
+    width: 60%;
+    height: 60%;
+    position: relative;
+    top: 15%;
+}
+
+.Upload-original {
+    background-color: rgb(255, 241, 225);
+    position: relative;
+    float: left;
+    width: 30%;
+    height: 70%;
+    left: 10%;
+}
+
+.Upload-sketch {
+    background-color: aqua;
+    position: relative;
+    float: right;
+    width: 30%;
+    height: 70%;
+    right: 10%;
+}
+
+.File-upload-img {
+    width: 50%;
+}
+
+.Upload-email {
+    position: relative;
+    float: left;
+    top: 80%;
+}
+
+.Upload-submit {
+    position: relative;
+    float: right;
+    top: 80%;
+    right: 10%;
+}
+
+#Upload-original-sub, #Upload-sketch-sub {
+    cursor: pointer;
+    position: relative;
+    top: 5%;
+}
+
+#Upload-original-button, #Upload-sketch-button {
+    display: none;
+}
