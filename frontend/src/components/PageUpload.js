@@ -3,7 +3,6 @@ import './PageUpload.css';
 import file_upload_img from '../img/file_upload_img.png';
 import axios from 'axios';
 import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers';
-import { ToastsStore } from 'react-toasts';
 
 class PageUpload extends Component {
     constructor(props){
