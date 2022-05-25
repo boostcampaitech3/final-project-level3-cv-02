@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './PageUpload.css';
 import file_upload_img from '../img/file_upload_img.png';
+import axios from 'axios';
+import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers';
+import { ToastsStore } from 'react-toasts';
 
 class PageUpload extends Component {
     constructor(props){
@@ -39,6 +42,27 @@ class PageUpload extends Component {
       // let submit_original_img = this.state.original_image_file;
       // let submit_sketch_img = this.state.sketch_image_file;
       // let submit_email = this.state.email;
+
+      // FormData로 host에 전송하는 코드?
+      const data = new FormData();
+      var host = window.location.protocol + "//" + window.location.host + "api/image";
+      data.append('submit_original_img', this.state.original_image_file);
+      data.append('submit_sketch_img', this.state.sketch_image_file);
+      data.append('submit_email', this.state.email);
+      axios.post(host, data, {
+        onUploadProgress: ProgressEvent => {
+          this.setState({
+            loaded: (ProgressEvent.loaded / ProgressEvent.total*100),
+          })
+        },
+      }) 
+      .then(res => {
+        alert('upload success');
+      })
+      .catch(err => {
+        alert('upload fail');
+      })
+      
       this.setState({
         email: '',
         original_image_file: null,
