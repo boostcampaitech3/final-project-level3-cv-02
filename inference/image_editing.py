@@ -52,7 +52,7 @@ def image_editing_denoising_step_flexible_mask(x, t, *,
     return sample
 
 
-def extract_mask(input_original, input_sketch):
+def extract_mask(input_original, input_sketch, args):
     img_original = PIL.Image.open(input_original).resize((256, 256))
     img_sketch = PIL.Image.open(input_sketch).resize((256, 256))
     to_tensor = transforms.ToTensor()
@@ -62,6 +62,10 @@ def extract_mask(input_original, input_sketch):
     img_original_tensor = img_original_tensor[:3, :, :]
     img_sketch_tensor = to_tensor(img_sketch)
     img_sketch_tensor = img_sketch_tensor[:3, :, :]
+    
+    save_num = str(args.num).zfill(4)
+    tvu.save_image(img_original_tensor, os.path.join(args.save1, f'bedroom_original_{save_num}.png'))
+    tvu.save_image(img_sketch_tensor, os.path.join(args.save2, f'bedroom_sketch_{save_num}.png'))
 
     # 두 이미지 차이 계산 후 0, 1 binary mask 생성
     mask_tensor = img_original_tensor - img_sketch_tensor
@@ -108,15 +112,12 @@ class Diffusion(object):
         elif self.model_var_type == 'fixedsmall':
             self.logvar = np.log(np.maximum(posterior_variance, 1e-20))
 
-    def image_editing_sample(self, path1, path2):
+    def image_editing_sample(self, path1, path2, num):
+        current_num = num
         print("Loading model")
         if self.config.data.dataset == "LSUN":
             if self.config.data.category == "bedroom":
                 url = "https://image-editing-test-12345.s3-us-west-2.amazonaws.com/checkpoints/bedroom.ckpt"
-            elif self.config.data.category == "church_outdoor":
-                url = "https://image-editing-test-12345.s3-us-west-2.amazonaws.com/checkpoints/church_outdoor.ckpt"
-        elif self.config.data.dataset == "CelebA_HQ":
-            url = "https://image-editing-test-12345.s3-us-west-2.amazonaws.com/checkpoints/celeba_hq.ckpt"
         else:
             raise ValueError
 
@@ -138,7 +139,7 @@ class Diffusion(object):
             if 'http' in path2:
                 path2 = download_image(path2)
 
-            img, mask = extract_mask(input_original=path1, input_sketch=path2)
+            img, mask = extract_mask(input_original=path1, input_sketch=path2, args=self.args)
 
             mask = mask.to(self.config.device)
             img = img.to(self.config.device)
@@ -154,7 +155,6 @@ class Diffusion(object):
                 total_noise_levels = self.args.t
                 a = (1 - self.betas).cumprod(dim=0)
                 x = x0 * a[total_noise_levels - 1].sqrt() + e * (1.0 - a[total_noise_levels - 1]).sqrt()
-                tvu.save_image((x + 1) * 0.5, os.path.join(self.args.image_folder, f'init_{ckpt_id}.png'))
 
                 with tqdm(total=total_noise_levels, desc="Iteration {}".format(it)) as progress_bar:
                     for i in reversed(range(total_noise_levels)):
@@ -164,14 +164,11 @@ class Diffusion(object):
                                                                         betas=self.betas)
                         x = x0 * a[i].sqrt() + e * (1.0 - a[i]).sqrt()
                         x[:, (mask != 1.)] = x_[:, (mask != 1.)]
-                        # added intermediate step vis
-                        if (i - 99) % 100 == 0:
-                            tvu.save_image((x + 1) * 0.5, os.path.join(self.args.image_folder,
-                                                                       f'noise_t_{i}_{it}.png'))
                         progress_bar.update(1)
 
                 x0[:, (mask != 1.)] = x[:, (mask != 1.)]
-                torch.save(x, os.path.join(self.args.image_folder,
-                                           f'samples_{it}.pth'))
-                tvu.save_image((x + 1) * 0.5, os.path.join(self.args.image_folder,
-                                                           f'samples_{it}.png'))
+    
+                for i in range(0, 8):
+                    tvu.save_image((x[i] + 1) * 0.5, 
+                                   os.path.join(self.args.save3, f'bedroom_generated_{str(current_num).zfill(4)}.png'))
+                    current_num += 1

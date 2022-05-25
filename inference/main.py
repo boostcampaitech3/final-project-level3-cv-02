@@ -25,6 +25,10 @@ def parse_args_and_config():
     parser.add_argument('--t', type=int, default=400, help='Sampling noise scale')
     parser.add_argument('--path1', type=str, default='/opt/ml/workspace/input/indoor_test_1_rescaled_512.png', help='Original image path')
     parser.add_argument('--path2', type=str, default='/opt/ml/workspace/input/indoor_test_1_input_512.png', help='Sketch image path')
+    parser.add_argument('--num', type=int, default='1', help='Saving image num')
+    parser.add_argument('--save1', type=str, default='/opt/ml/SDEdit/original_image', help='Saving 256*256 original image path')
+    parser.add_argument('--save2', type=str, default='/opt/ml/SDEdit/sketch_image', help='Saving 256*256 sketch image path')
+    parser.add_argument('--save3', type=str, default='/opt/ml/SDEdit/generated_image', help='Saving 256*256 generated image path')
     args = parser.parse_args()
 
     # parse config file
@@ -44,6 +48,9 @@ def parse_args_and_config():
     logger.setLevel(level)
 
     os.makedirs(os.path.join(args.exp, 'image_samples'), exist_ok=True)
+    os.makedirs(args.save1, exist_ok=True)
+    os.makedirs(args.save2, exist_ok=True)
+    os.makedirs(args.save3, exist_ok=True)
     args.image_folder = os.path.join(args.exp, 'image_samples', args.image_folder)
     if not os.path.exists(args.image_folder):
         os.makedirs(args.image_folder)
@@ -100,7 +107,7 @@ def main():
 
     try:
         runner = Diffusion(args, config)
-        runner.image_editing_sample(args.path1, args.path2)
+        runner.image_editing_sample(args.path1, args.path2, args.num*48)
     except Exception:
         logging.error(traceback.format_exc())
 
