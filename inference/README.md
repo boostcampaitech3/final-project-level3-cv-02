@@ -14,7 +14,7 @@
   * {args.save2}/bedroom_sketch_{num}.png
   * {args.save3}/bedroom_generated\_{num*48}.png 부터 {args.save3}/bedroom_generated\_{num\*80-1}까지 생성
 
-**※ num이 0일 경우 generated_image를 0000~0079까지 생성하고, num이 1일 경우 0048~0096까지 생성하는 등등 index가 겹쳐서 동일한 폴더에 저장할경우 겹치는 index는 파일을 덮어쓰게 됨. save3를 각각 다르게 설정하여 다른 폴더에 저장하고, 선정한 48장의 이미지만 generated_image 폴더로 옮기는 걸 추천!** 
+**※ num이 0일 경우 generated_image를 0000\~0079까지 생성하고, num이 1일 경우 0048\~0096까지 생성하는 등등 index가 겹쳐서 동일한 폴더에 저장할경우 겹치는 index는 파일을 덮어쓰게 됨. save3를 각각 다르게 설정하여 다른 폴더에 저장하고, 선정한 48장의 이미지만 generated_image 폴더로 옮기는 걸 추천!** 
 
 
 
