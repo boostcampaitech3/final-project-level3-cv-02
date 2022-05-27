@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './PageUpload.css';
 import file_upload_img from '../img/file_upload_img.png';
 import axios from 'axios';
-import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers';
 
 class PageUpload extends Component {
     constructor(props){
@@ -38,11 +37,7 @@ class PageUpload extends Component {
       alert('Submit!');
       let original_img_url = this.state.original_image_url;
       let sketch_img_url = this.state.sketch_image_url;
-      // let submit_original_img = this.state.original_image_file;
-      // let submit_sketch_img = this.state.sketch_image_file;
-      // let submit_email = this.state.email;
-
-      // FormData로 host에 전송하는 코드?
+      
       const data = new FormData();
       var host = window.location.protocol + "//" + window.location.host + "api/image";
       data.append('submit_original_img', this.state.original_image_file);
