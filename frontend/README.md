@@ -14,6 +14,7 @@ node v16.15.0 \
 npm install react-slick
 npm install slick-carousel
 npm i react-intersection-observer
+npm i axios
 ~~~
 
 ### Start
