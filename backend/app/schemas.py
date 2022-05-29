@@ -6,7 +6,7 @@ class Image(BaseModel):
     img_url: HttpUrl
 
 class UserCreate(BaseModel):
-    id : UUID = Field(default_factory=uuid4, index=True, primary_key=True)
+    id : int
     email : EmailStr
     original_img : HttpUrl
     sketch_img : HttpUrl

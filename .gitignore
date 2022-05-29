@@ -1,6 +1,7 @@
 
 # Created by https://www.toptal.com/developers/gitignore/api/node,react,windows,macos,linux,python,database,visualstudiocode,git
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,react,windows,macos,linux,python,database,visualstudiocode,git
+.env
 
 ### Database ###
 *.accdb
