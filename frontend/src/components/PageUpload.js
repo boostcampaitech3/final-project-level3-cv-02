@@ -91,6 +91,8 @@ class PageUpload extends Component {
           sketch_image_file: null,
           original_image_url: file_upload_img,
           sketch_image_url: file_upload_img,
+          original_image_size: null,
+          sketch_image_size: null
         });
         URL.revokeObjectURL(original_img_url);
         URL.revokeObjectURL(sketch_img_url);
