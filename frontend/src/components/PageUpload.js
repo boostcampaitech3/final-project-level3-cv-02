@@ -67,7 +67,7 @@ class PageUpload extends Component {
       }
       else {
         const data = new FormData();
-        var host = window.location.protocol + "//" + window.location.host + "api/image";
+        var host = 'http://localhost:8000/';
 
         data.append('submit_original_img', this.state.original_image_file);
         data.append('submit_sketch_img', this.state.sketch_image_file);
