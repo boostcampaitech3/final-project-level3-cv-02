@@ -37,9 +37,9 @@ class PageUpload extends Component {
       alert('Submit!');
       let original_img_url = this.state.original_image_url;
       let sketch_img_url = this.state.sketch_image_url;
-      
+ 
       const data = new FormData();
-      var host = window.location.protocol + "//" + window.location.host + "api/image";
+      var host = 'http://localhost:8000/';
       data.append('submit_original_img', this.state.original_image_file);
       data.append('submit_sketch_img', this.state.sketch_image_file);
       data.append('submit_email', this.state.email);
@@ -52,6 +52,7 @@ class PageUpload extends Component {
       }) 
       .then(res => {
         alert('upload success');
+        console.log(data)
       })
       .catch(err => {
         alert('upload fail');

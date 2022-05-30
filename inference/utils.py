@@ -12,7 +12,6 @@ import matplotlib.pyplot as plt
 
 sys.path.append("../")
 
-
 warnings.filterwarnings("ignore")
 
 device = "cuda"
