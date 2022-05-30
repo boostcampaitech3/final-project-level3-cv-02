@@ -6,6 +6,9 @@
 ## Introduction
 
 ## Data
+LSUN bedrrom
+
+ImageNet
 
 
 ## Model
