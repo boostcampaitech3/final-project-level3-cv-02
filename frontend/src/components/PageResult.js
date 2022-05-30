@@ -21,7 +21,7 @@ class PageResult extends Component {
     };
 
     return (
-      <div className="Result-background">
+      <div className={(this.props.percent > 2.5) ? "Result-background" : "Result-background-ani"} id="scroll_to_result">
         <div className="Carousel-background-block">
           <h2>Our Results</h2>
           <video className="Result-MP4" autoPlay="autoPlay" loop="infinite" muted>

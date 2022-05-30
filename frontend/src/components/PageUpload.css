@@ -1,56 +1,106 @@
 .Upload-background {
     background-color: rgb(255, 255, 255);
+    height: 120vh;
+    text-align: center;
+    -webkit-animation: upload-fade-in-02 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: upload-fade-in-02 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+.Upload-background-ani {
+    background-color: rgb(255, 255, 255);
     height: 90vh;
     text-align: center;
+    visibility: hidden;
+}
+
+.Upload-logo {
+  position: relative;
+  top: 10%;
+  width: 4%;
+}
+
+.Upload-background-title {
+    position: relative;
+    top: 10%;
+    font-weight: 550;
+    font-family: fantasy;
 }
 
 .Upload-title {
     position: relative;
-    top: 10%;
+    font-size: 2.5vh;
+    font-weight: 500;
+    top: -20%;
 }
 
 .Upload-form {
     display: inline-block;
-    /* background-color: brown; */
-    width: 60%;
-    height: 60%;
+    width: 70%;
+    height: 50%;
     position: relative;
-    top: 15%;
+    top: 20%;
 }
 
 .Upload-original {
-    background-color: rgb(255, 241, 225);
     position: relative;
     float: left;
     width: 30%;
     height: 70%;
-    left: 10%;
+    left: 15%;
+    border-style: groove;
+    border-radius: 30px;
 }
 
 .Upload-sketch {
-    background-color: aqua;
     position: relative;
     float: right;
     width: 30%;
     height: 70%;
-    right: 10%;
+    right: 15%;
+    border-style: groove;
+    border-radius: 30px;
 }
 
 .File-upload-img {
-    width: 50%;
+    width: 70%;
+    position: relative;
+    top: -10%;
 }
 
 .Upload-email {
+    background-color: #f9f1e9;
     position: relative;
     float: left;
-    top: 80%;
+    top: 85%;
+    height: 4vh;
+    width: 25%;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    padding-left: 2%;
+    padding-right: 2%;
+    color: gray;
+    font-size: 15px;
 }
 
 .Upload-submit {
+    background-color: rgb(227, 227, 227);
     position: relative;
     float: right;
-    top: 80%;
-    right: 10%;
+    top: 85%;
+    right: 2%;
+    border: none;
+    border-radius: 10px;
+    width: 6%;
+    height: 4vh;
+    color: rgb(73, 73, 73);
+    font-size: 15px;
+}
+
+.Upload-submit:hover {
+    cursor: pointer;
+    -webkit-animation: upload-fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: upload-fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 #Upload-original-sub, #Upload-sketch-sub {
@@ -62,3 +112,54 @@
 #Upload-original-button, #Upload-sketch-button {
     display: none;
 }
+
+.Upload-original:hover, .Upload-sketch:hover {
+    background-color: rgb(238, 238, 238);
+    -webkit-animation: upload-fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: upload-fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+.toast {
+    background-color:#f9f1e9 !important;
+    color: rgb(73, 73, 73) !important;
+}
+
+
+
+
+/* Animation */
+
+@-webkit-keyframes upload-fade-in {
+    0% {
+      background-color: white;
+    }
+    100% {
+      background-color: rgb(238, 238, 238);
+    }
+  }
+  @keyframes upload-fade-in {
+    0% {
+      background-color: white;
+    }
+    100% {
+      background-color: rgb(238, 238, 238);
+    }
+  }
+
+  @-webkit-keyframes upload-fade-in-02 {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes upload-fade-in-02 {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  

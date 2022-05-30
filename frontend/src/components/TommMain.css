@@ -1,7 +1,6 @@
 .Main-background {
     background-color: #f9f1e9;
     height: 100vh;
-    /* min-height: 100vh; */
 }
 
 .Main-Logo {
@@ -10,13 +9,14 @@
     left:1.5%;
     top:2%;
     opacity: 70%;
+    z-index: 1000;
 }
 
 .Main-Image {
     width: 50%;
     position: absolute;
-    left:10%;
-    top:15%;
+    left:8%;
+    top:14%;
     filter: drop-shadow(10px 10px 10px rgb(118, 118, 118));
     -webkit-animation: fade-in 2.0s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 	        animation: fade-in 2.0s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
@@ -28,9 +28,21 @@
     height: 30%;
     position: absolute;
     float: right;
-    top: 30%;
+    top: 23%;
     right: 8%;
     white-space: pre-wrap;
+    opacity: 80%;
+}
+
+.Main-Text-Div-02 {
+  text-align: right;
+  width: 40%;
+  height: 30%;
+  position: absolute;
+  float: right;
+  top: 45%;
+  right: 8%;
+  white-space: pre-wrap;
 }
 
 .Main-Button-Div-01 {
@@ -69,10 +81,88 @@
     top: 30%;
     opacity: 70%;
     border-radius: 20px;
-    -webkit-animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1.5s both;
-	        animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1.5s both;
+    -webkit-animation: fade-in-text 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1.5s both;
+	        animation: fade-in-text 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1.5s both;
 }
 
+.Main-Button-01-after {
+  background-color: black;
+  color: white;
+  font-size: 2.0vh;
+  width: 40%;
+  height: 50%;
+  position: relative;
+  top: 30%;
+  opacity: 70%;
+  border-radius: 20px;
+}
+
+.Main-Button-01-after:hover {
+    cursor: pointer;
+    -webkit-animation: pulsate-bck 0.5s ease-in-out infinite both;
+	        animation: pulsate-bck 0.5s ease-in-out infinite both;
+}
+
+.scroll-downs {
+  position: relative;
+  top: 90%;
+  margin: auto;
+  width :2%;
+  height: 7vh;
+  -webkit-animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.5s both;
+	        animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.5s both;
+}
+.mousey {
+  width: 3%;
+  padding-top: 10px;
+  padding-bottom: 1px;
+  padding-left: 10px;
+  padding-right: 15px;
+  height: 4vh;
+  border: 2px solid black;
+  border-radius: 25px;
+  opacity: 0.5;
+  box-sizing: content-box;
+}
+.scroller {
+  width: 7px;
+  height: 1vh;
+  border-radius: 50%;
+  background-color: black;
+  animation-name: main-scroll;
+  animation-duration: 1.5s;
+  animation-timing-function: cubic-bezier(.15,.41,.69,.94);
+  animation-iteration-count: infinite;
+}
+
+.Main-navi {
+  width: 5%;
+  height: 30vh;
+  position: fixed;
+  left: 92%;
+  top: 38%;
+  list-style:none;
+  z-index: 1000;
+  -webkit-animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.5s both;
+	        animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.5s both;
+}
+
+.Main-dot {
+  position: relative;
+  width: 10%;
+  opacity: 40%;
+}
+
+.Main-dot-current {
+  position: relative;
+  width: 12%;
+  opacity: 80%;
+}
+
+.Main-dot:hover, .Main-dot-current:hover {
+  cursor: pointer;
+  opacity: 80%;
+}
 
 
 
@@ -94,6 +184,23 @@
     }
     100% {
       opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes fade-in-text {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.7;
+    }
+  }
+  @keyframes fade-in-text {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.7;
     }
   }
   
@@ -123,3 +230,39 @@
     }
   }
 
+  @keyframes main-scroll {
+    0% { opacity: 0; }
+    10% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(20px); opacity: 0;}
+  }
+
+
+  @-webkit-keyframes pulsate-bck {
+    0% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(0.9);
+              transform: scale(0.9);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+  @keyframes pulsate-bck {
+    0% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(0.9);
+              transform: scale(0.9);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+  

@@ -15,6 +15,8 @@ npm install react-slick
 npm install slick-carousel
 npm i react-intersection-observer
 npm i axios
+npm install -s react-toasts
+npm install --save react-scroll
 ~~~
 
 ### Start
