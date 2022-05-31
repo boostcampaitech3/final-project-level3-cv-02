@@ -8,7 +8,7 @@
 
 ## 서비스 흐름도
 
-![image](https://user-images.githubusercontent.com/63588046/170953378-f07697bb-cd34-42ec-b8e9-b657c50a3e0c.png)
+
 
 ## 서비스 시스템 구조
 
@@ -22,14 +22,19 @@
 
 
 ## Data
-LSUN bedrrom
+#### LSUN bedrrom
+* Lsun 데이터는 총 10개의 라벨로 구성되는데 그중 침실 데이터를 사용했다.
+* train 데이터 : 3,033,042
+* validation 데이터 : 300
 
-ImageNet
+#### ImageNet
+* 총 1000개의 라벨로 구성되어 있음
+* train 데이터 : 120만개
+* validation 데이터 : 5만개
 
 
 ## Model
-
-![image](https://user-images.githubusercontent.com/63588046/169930202-56e1f0d1-d05b-40c9-82c8-5585fc239247.png)
+![image](https://user-images.githubusercontent.com/63588046/170953378-f07697bb-cd34-42ec-b8e9-b657c50a3e0c.png)
 
 원본 이미지와 스케치한 이미지를 넣으면 마스크를 뽑아냅니다. 마스크와 스케치한 이미지를 SDEdit에 넣어서 새로운 인테리어가 사진을 만듭니다.. 그러나 새로 나온 인테리어 사진은 해상도가 너무 낮습니다. 그래서 해상도를 높이기 위해 ESRGAN을 사용했습니다.
 
