@@ -41,6 +41,12 @@
 7. 고해상도 이미지를 이메일로 받는다.
 
 ## Why SDEdit
+* 성능이 GAN 보다 좋다
+* 실시간으로 해줄 필요가 없다.
+* 저작권
+* 학습 X (새롭게 할 수 X)
+* API
+
 
 https://paperswithcode.com/sota/image-super-resolution-on-urban100-4x
 
