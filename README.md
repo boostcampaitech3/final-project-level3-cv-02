@@ -64,13 +64,10 @@
 ![image](https://user-images.githubusercontent.com/63588046/171135260-90233af8-3186-4b27-94f1-24ee90202810.png)
 
 
-가장 흔한 super resolution 모델인 EDSR과 현재 모델중 가장 성능이 좋은 CAR을 사용하지 않고 우리는 ESRGAN을 사용했다.
-
-EDSR은 일반적으로 성능이 좋았다. 그러나 동일한 색으로 겹쳐있을 경우 깨지는 경향이 나타났다.. 
-
-CAR과 ESRGAN은 육안으로 보았을 때 크게 차이가 없었다. 그러나 CAR모델은 메모리 크기가 360MB가 넘는 방면에 ESRGAN은 16MB 정도로 20배 넘게 차이가 났다.
-
-그래서 ESRGAN을 사용했다.
+* 가장 흔한 super resolution 모델인 EDSR과 현재 모델중 가장 성능이 좋은 CAR을 사용하지 않고 우리는 ESRGAN을 사용했다.
+* EDSR은 일반적으로 성능이 좋았다. 그러나 동일한 색으로 겹쳐있을 경우 깨지는 경향이 나타났다.. 
+* CAR과 ESRGAN은 육안으로 보았을 때 크게 차이가 없었다. 그러나 CAR모델은 메모리 크기가 360MB가 넘는 방면에 ESRGAN은 16MB 정도로 20배 넘게 차이가 났다.
+* 그래서 ESRGAN을 사용했다.
 
 
 ## 아쉬운 점
