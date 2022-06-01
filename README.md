@@ -87,5 +87,8 @@ Samsung Bespoke, LG objet 등 고객들에게 맞춤형 가구 또는 인테리�
 |[Github](https://github.com/Yewon-dev)|[Github](https://github.com/zooyeonii)|[Github](https://github.com/nestiank)|[Github](https://github.com/hkyoo52)|[Github](https://github.com/heosuab)
 
 ## Reference
-
+* SDEdit github [link](https://github.com/ermongroup/SDEdit)
+* score modeling [link](https://arxiv.org/abs/1907.05600)
+* score based SDEdit [link](https://arxiv.org/abs/2011.13456)
+* SDEdit [link](https://arxiv.org/abs/2108.01073)
 
