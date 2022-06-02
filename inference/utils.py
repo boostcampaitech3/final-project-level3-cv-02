@@ -1,7 +1,7 @@
 import torch
 import warnings
 from image_editing import *
-from main import dict2namespace
+from SDEdit import dict2namespace
 import os
 import yaml
 import sys
