@@ -14,7 +14,7 @@ Samsung Bespoke, LG objet 등 고객들에게 맞춤형 가구 또는 인테리�
 
 ## 서비스 시스템 구조
 
-
+<img width="1263" alt="스크린샷 2022-06-03 오전 1 31 38" src="https://user-images.githubusercontent.com/56240088/171679444-4482c0c5-9255-4bf3-9692-6eccfdb50b70.png">
 
 
 ## Data
