@@ -1,8 +1,7 @@
 import torch
 import warnings
-from runners.image_editing import *
-from main import dict2namespace
-from functions.process_data import *
+from image_editing import *
+from SDEdit import dict2namespace
 import os
 import yaml
 import sys
