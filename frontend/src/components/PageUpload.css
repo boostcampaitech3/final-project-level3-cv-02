@@ -62,7 +62,10 @@
 }
 
 .File-upload-img {
-    width: 70%;
+    max-width: 70%;
+    max-height: 70%;
+    width: auto;
+    height: auto;
     position: relative;
     top: -10%;
 }
@@ -99,8 +102,8 @@
 
 .Upload-submit:hover {
     cursor: pointer;
-    -webkit-animation: upload-fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: upload-fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    -webkit-animation: upload-submit-fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: upload-submit-fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 #Upload-original-sub, #Upload-sketch-sub {
@@ -122,6 +125,24 @@
 .toast {
     background-color:#f9f1e9 !important;
     color: rgb(73, 73, 73) !important;
+}
+
+.Upload-guideline {
+  position: relative;
+  top: 12vh;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  font-size: 2vh;
+  color: rgb(78, 46, 21);
+  text-decoration: underline;
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+}
+
+.Upload-guideline:hover {
+  cursor: pointer;
+  -webkit-animation: upload-button 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: upload-button 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 
@@ -162,4 +183,45 @@
       opacity: 1;
     }
   }
-  
+
+  @-webkit-keyframes upload-button {
+    0% {
+      background-color: rgba(0, 0, 0, 0);
+      color: rgb(78, 46, 21);
+    }
+    100% {
+      background-color: rgba(84, 64, 49, 0.742);
+      color: white;
+    }
+  }
+  @keyframes upload-button {
+    0% {
+      background-color: rgba(0, 0, 0, 0);
+      color: rgb(78, 46, 21);
+    }
+    100% {
+      background-color: rgba(84, 64, 49, 0.742);
+      color: white;
+    }
+  }
+
+  @-webkit-keyframes upload-submit-fade-in {
+    0% {
+      background-color: rgb(227, 227, 227);
+      color: rgb(73, 73, 73);
+    }
+    100% {
+      background-color: rgb(73, 73, 73);
+      color: white;
+    }
+  }
+  @keyframes upload-submit-fade-in {
+    0% {
+      background-color: rgb(227, 227, 227);
+      color: rgb(73, 73, 73);
+    }
+    100% {
+      background-color: rgb(73, 73, 73);
+      color: white;
+    }
+  }

@@ -24,7 +24,7 @@ class App extends Component {
       this.setState({
         scroll_y: window_scroll,
         screen_y: screen_height,
-        scroll_percent: scroll_percent
+        scroll_percent: scroll_percent,
       });
 
       window.onbeforeunload = function pushRefresh() {

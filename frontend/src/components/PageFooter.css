@@ -1,4 +1,132 @@
 .Footer-background {
   background-color: #fff8f2;
   height: 30vh;
+  -webkit-animation: footer-fade-in 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: footer-fade-in 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+.Footer-background-ani {
+  background-color: #fff8f2;
+  height: 30vh;
+  visibility: hidden;
+}
+
+.Footer-logo {
+  position: relative;
+  float: left;
+  width: 30%;
+  height: 30vh;
+}
+
+.Footer-content {
+  position: relative;
+  float: left;
+  width: 50%;
+  height: 80%;
+  text-align: left;
+  top: 15%;
+}
+
+.Footer-github {
+  position: relative;
+  float: left;
+  width: 20%;
+  height: 30%;
+  top: 20%;
+  text-align: left;
+}
+
+.Footer-logo-img {
+  position: relative;
+  width: 40%;
+  left: -10%;
+  margin-top: 5%;
+  opacity: 80%;
+}
+
+.Footer-content-01 {
+  font-weight: bold;
+  font-size: 2vh;
+  opacity: 70%;
+}
+
+.Footer-content-02 {
+  font-size: 2vh;
+  opacity: 70%;
+}
+
+table {
+  height: 40%;
+  font-size: 2vh;
+  opacity: 70%;
+}
+
+th {
+  padding-right: 30px;
+}
+
+.Footer-github-button {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: gray;
+  border-radius: 5px;
+  width: 50%;
+  height: 50%;
+  font-size: 2vh;
+  opacity: 80%;
+}
+
+.Footer-github-button:hover {
+  cursor: pointer;
+  -webkit-animation: github-emphasis 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: github-emphasis 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+td {
+  padding: 5px;
+}
+
+
+
+/* animation */
+
+@-webkit-keyframes github-emphasis {
+  0% {
+    background-color: rgba(0, 0, 0, 0);
+    color: gray;
+  }
+  100% {
+    background-color: rgb(63, 63, 63);
+    color: white;
+  }
+}
+@keyframes github-emphasis {
+  0% {
+    background-color: rgba(0, 0, 0, 0);
+    color: gray;
+  }
+  100% {
+    background-color: rgb(63, 63, 63);
+    color: white;
+  }
+}
+
+
+
+/* animation */
+
+@-webkit-keyframes footer-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes footer-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
