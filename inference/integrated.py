@@ -18,9 +18,9 @@ def integrated_pipeline(path_original: str, path_sketch: str, width: int, height
     path_options = f"--path1 {path_original} --path2 {path_sketch} --save3 /opt/ml/generated/{random_id}"
     result_options = f"--save4 /opt/ml/generated/{random_id}_super_resolution --width {width} --height {height}"
 
-    subprocess.call(combine_option("python ../inference/SDEdit.py --sample_step 10 --t 500", path_options), shell=True)
-    subprocess.call(combine_option("python ../inference/recommendation.py", path_options), shell=True)
-    subprocess.call(combine_option("python ../inference/ESRGAN.py", result_options), shell=True)
+    subprocess.call(combine_option("python SDEdit.py --sample_step 10 --t 500", path_options), shell=True)
+    subprocess.call(combine_option("python recommendation.py", path_options), shell=True)
+    subprocess.call(combine_option("python ESRGAN.py", result_options), shell=True)
 
     return os.listdir(f"/opt/ml/generated/{random_id}_super_resolution")
 
