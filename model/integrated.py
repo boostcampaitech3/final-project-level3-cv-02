@@ -12,7 +12,7 @@ def combine_option(command: str, options: str) -> str:
 
 def integrated_pipeline(path_original: str, path_sketch: str, width: int, height: int) -> int:
     sha1 = hashlib.new('sha1')
-    sha1.update(path_original)
+    sha1.update(path_original.encode('utf-8'))
     random_id = sha1.hexdigest()[:8]
 
     path_options = f"--path1 {path_original} --path2 {path_sketch} --save3 /opt/ml/generated/{random_id}"
