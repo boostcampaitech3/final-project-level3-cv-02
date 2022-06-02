@@ -12,14 +12,18 @@
     z-index: 1000;
 }
 
+.Main-Logo {
+  cursor: pointer;
+}
+
 .Main-Image {
     width: 50%;
     position: absolute;
     left:8%;
     top:14%;
     filter: drop-shadow(10px 10px 10px rgb(118, 118, 118));
-    -webkit-animation: fade-in 2.0s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: fade-in 2.0s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    -webkit-animation: fade-in 2.0s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1s both;
+	        animation: fade-in 2.0s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1s both;
 }
 
 .Main-Text-Div-01 {
@@ -58,8 +62,8 @@
 .Main-Text-01 {
     font-size: 7.0vh;
     opacity: 70%;
-    -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
-	        animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
+    -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 1.5s both;
+	        animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 1.5s both;
 }
 
 .Main-Text-02 {
@@ -67,8 +71,8 @@
     color: gray;
     position:relative;
     top:10%;
-    -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 1.0s both;
-	        animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 1.0s both;
+    -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 2.0s both;
+	        animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 2.0s both;
 }
 
 .Main-Button-01 {
@@ -81,8 +85,8 @@
     top: 30%;
     opacity: 70%;
     border-radius: 20px;
-    -webkit-animation: fade-in-text 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1.5s both;
-	        animation: fade-in-text 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1.5s both;
+    -webkit-animation: fade-in-text 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.5s both;
+	        animation: fade-in-text 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.5s both;
 }
 
 .Main-Button-01-after {
@@ -109,8 +113,8 @@
   margin: auto;
   width :2%;
   height: 7vh;
-  -webkit-animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.5s both;
-	        animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.5s both;
+  -webkit-animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 3.2s both;
+	        animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 3.2s both;
 }
 .mousey {
   width: 3%;
@@ -143,8 +147,8 @@
   top: 38%;
   list-style:none;
   z-index: 1000;
-  -webkit-animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.5s both;
-	        animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.5s both;
+  -webkit-animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 3.2s both;
+	        animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 3.2s both;
 }
 
 .Main-dot {

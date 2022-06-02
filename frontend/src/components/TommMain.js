@@ -24,7 +24,9 @@ class TommMain extends Component {
 
       return (
         <div className="Main-background" id="scroll_to_main">
-          <img src={main_logo} className="Main-Logo" alt=""></img>
+          <Link to="scroll_to_main" spy={true} smooth={true}>
+            <img src={main_logo} className="Main-Logo" alt=""></img>
+          </Link>
           <img src={main_image} className="Main-Image" alt=""></img>
           <div className="Main-Text-Div-01">
             <p className="Main-Text-01">{main_text}</p>
