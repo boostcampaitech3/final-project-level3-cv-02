@@ -5,9 +5,15 @@ from . import models, schemas
 # FE에서 DATA 받아올 때
 def create_user(db: Session, user: schemas.UserCreate):
     db_user = models.User(
+        name=user.name,
         email=user.email, 
         original_img=user.original_img, 
-        sketch_img=user.sketch_img
+        sketch_img=user.sketch_img,
+        original_img_width=user.original_img_width,
+        original_img_height=user.original_img_height,
+        sketch_img_width=user.sketch_img_width,
+        sketch_img_height=user.sketch_img_height,
+        timestamp=user.timestamp
     )
     db.add(db_user)
     db.commit()

@@ -71,12 +71,13 @@ class PageUpload extends Component {
       let current_time = new Date();
       let time = {
         year: current_time.getFullYear(),
-        month: current_time.getMonth()+1,
-        date: current_time.getDate(),
-        hours: current_time.getHours(),
-        minutes: current_time.getMinutes()
+        month: ("0"+(current_time.getMonth()+1)).slice(-2),
+        date: ("0"+current_time.getDate()).slice(-2),
+        hours: ("0"+current_time.getHours()).slice(-2),
+        minutes: ("0"+current_time.getMinutes()).slice(-2),
+        seconds: ("0"+current_time.getSeconds()).slice(-2),
       };
-      let timestring = `${time.year}/${time.month}/${time.date} ${time.hours}:${time.minutes}`;
+      let timestring = `${time.year}-${time.month}-${time.date} ${time.hours}:${time.minutes}:${time.seconds}`;
       // eslint-disable-next-line
       let email_format = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
