@@ -53,9 +53,9 @@ def plot_image(image, title=""):
     plt.title(title)
 
 
-def resize_image(image, width: int, height: int):
+def resize_image(image, size: tuple):
     image = tf.cast(tf.clip_by_value(image, 0, 255), tf.uint8)
-    image = np.asarray(Image.fromarray(image.numpy()).resize([height, width], Image.BICUBIC))
+    image = np.asarray(Image.fromarray(image.numpy()).resize(size))
     image = tf.expand_dims(image, 0)
     image = tf.cast(image, tf.float32)
     return image
@@ -79,9 +79,8 @@ if __name__ == '__main__':
 
     super_images = []
     for i in range(len(img_paths)):
-        IMAGE_PATH = img_paths[i]
-        image = preprocess_image(IMAGE_PATH)
-        image = resize_image(image, args.width, args.height)
+        image = preprocess_image(os.path.join(args.save4, img_paths[i]))
+        image = resize_image(image, (args.width // 4, args.height // 4))
 
         super_image = model(image)
 
@@ -98,9 +97,11 @@ if __name__ == '__main__':
         fig.tight_layout()
         plot_image(tf.squeeze(super_image), str(super_image.shape))
 
+    plt.savefig(os.path.join(args.save4, 'result.png'), dpi=150)
+
     super_images_paths = []
     for index, super_image in enumerate(super_images):
-        tvu.save_image(super_image, os.path.join(args.save4, f"bedroom_upscaled_{index}.png"))
+        tf.keras.preprocessing.image.save_img(os.path.join(args.save4, f"bedroom_upscaled_{index}.png"), super_image)
 
     for image_path in img_paths:
-        os.remove(image_path)
+        os.remove(os.path.join(args.save4, image_path))
