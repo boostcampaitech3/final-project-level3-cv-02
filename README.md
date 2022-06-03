@@ -53,6 +53,9 @@ Samsung Bespoke, LG objet 등 고객들에게 맞춤형 가구 또는 인테리�
 4. DALLE-2는 pretrained-weight도 존재하지 않아서 우리가 가진 V100 GPU로는 학습 시간&메모리 문제상으로 힘들것 같다고 판단하여 SDEdit 선정
 5. Dalle-2는 API도 제공해주지 않아서 사용하기 어렵다.
 
+## Why Classification으로 추천?
+* Resnet으로 분류를 할 때 높은 확률이 나오는 것은
+
 
 ## Why ESRGAN
 
