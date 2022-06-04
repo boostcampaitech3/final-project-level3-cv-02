@@ -6,7 +6,7 @@ authors = ["Yewon Kim <yewon.devv@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "3.8"
 fastapi = "^0.70.0"
 fastapi-mail = "1.0.2"
 uvicorn = "^0.17.6"
@@ -21,7 +21,7 @@ python-multipart = "^0.0.5"
 PyYAML = "^6.0"
 tqdm = "^4.64.0"
 image = "^1.5.33"
-tensorboard = "2.4.1"
+tensorboard = "2.9"
 matplotlib = "3.3.4"
 torchvision = "^0.10.1"
 async_generator = "^1.10"
@@ -31,6 +31,9 @@ mysql = "^0.0.3"
 python-dotenv = "^0.20.0"
 aiofiles = "^0.8.0"
 Jinja2 = "^3.1.2"
+pandas = "^1.4.2"
+tensorflow-hub = "^0.12.0"
+tensorflow = "^2.9.1"
 
 
 [tool.poetry.dev-dependencies]

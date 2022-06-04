@@ -5,6 +5,8 @@ import hashlib
 
 from PIL import Image
 
+PATH = '/opt/ml/bucket-git/final-project-level3-cv-02/backend/app/inference/'
+
 
 def combine_option(command: str, options: str) -> str:
     return command + " " + options
@@ -18,11 +20,13 @@ def integrated_pipeline(path_original: str, path_sketch: str, width: int, height
     path_options = f"--path1 {path_original} --path2 {path_sketch} --save3 /opt/ml/generated/{random_id}"
     result_options = f"--save4 /opt/ml/generated/{random_id}_super_resolution --width {width} --height {height}"
 
-    subprocess.call(combine_option("python SDEdit.py --sample_step 10 --t 500", path_options), shell=True)
-    subprocess.call(combine_option("python recommendation.py", path_options), shell=True)
-    subprocess.call(combine_option("python ESRGAN.py", result_options), shell=True)
+    subprocess.call(combine_option("python /opt/ml/bucket-git/final-project-level3-cv-02/backend/inference/SDEdit.py --sample_step 10 --t 500", path_options), shell=True)
+    subprocess.call(combine_option("python /opt/ml/bucket-git/final-project-level3-cv-02/backend/inference/recommendation.py", path_options), shell=True)
+    subprocess.call(combine_option("python /opt/ml/bucket-git/final-project-level3-cv-02/backend/inference/ESRGAN.py", result_options), shell=True)
 
-    return os.listdir(f"/opt/ml/generated/{random_id}_super_resolution")
+
+    return f"/opt/ml/generated/{random_id}_super_resolution"
+    
 
 
 if __name__ == '__main__':

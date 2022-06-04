@@ -21,12 +21,13 @@ def create_user(db: Session, user: schemas.UserCreate):
     return db_user
 
 # DB에 output_img 저장
-def create_result(db: Session, user: schemas.UserCreate):
-    db_result = models.User(output_img=user.output_img)
-    db.add(db_result)
+def update_user(db: Session, user_name: str, output_img: str):
+    db_user = db.query(models.User).filter(models.User.name == user_name).first()
+    db_user.output_img = output_img
+    db.add(db_user)
     db.commit()
-    db.refresh(db_result)
-    return db_result
+    db.refresh(db_user)
+    return db_user
 
 def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()

@@ -1,4 +1,4 @@
-from typing import Optional, Union
+from typing import Optional, List
 from uuid import UUID, uuid4
 from pydantic import BaseModel, EmailStr, Field, HttpUrl
 from datetime import datetime
@@ -13,7 +13,7 @@ class UserCreate(BaseModel):
     email : EmailStr
     original_img : HttpUrl
     sketch_img : HttpUrl
-    output_img : HttpUrl = None
+    output_img : str = None
     original_img_width : int
     original_img_height : int
     sketch_img_width : int
@@ -22,3 +22,4 @@ class UserCreate(BaseModel):
 
     class Config:
         orm_mode = True
+

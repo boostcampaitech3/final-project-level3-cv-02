@@ -77,7 +77,7 @@ class PageUpload extends Component {
         minutes: ("0"+current_time.getMinutes()).slice(-2),
         seconds: ("0"+current_time.getSeconds()).slice(-2),
       };
-      let timestring = `${time.year}-${time.month}-${time.date} ${time.hours}:${time.minutes}:${time.seconds}`;
+      let timestring = `${time.year}-${time.month}-${time.date}_${time.hours}:${time.minutes}:${time.seconds}`;
       // eslint-disable-next-line
       let email_format = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
