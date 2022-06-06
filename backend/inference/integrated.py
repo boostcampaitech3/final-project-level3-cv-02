@@ -57,7 +57,7 @@ def size_check(path_original: str, path_sketch: str, width: int, height: int) ->
         crop_sketch_image(path_original, path_sketch)
 
 
-def integrated_pipeline(path_original: str, path_sketch: str, width: int, height: int) -> List[str]:
+def integrated_pipeline(path_original: str, path_sketch: str, width: int, height: int) -> str:
     size_check(path_original, path_sketch, width, height)
 
     sha1 = hashlib.new('sha1')
