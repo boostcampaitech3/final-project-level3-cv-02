@@ -31,7 +31,7 @@ def parse_args_and_config():
     args = parser.parse_args()
 
     # parse config file
-    with open(os.path.join('configs', args.config), 'r') as f:
+    with open(os.path.join('/opt/ml/bucket-git/final-project-level3-cv-02/backend/inference/configs', args.config), 'r') as f:
         config = yaml.safe_load(f)
     new_config = dict2namespace(config)
 

@@ -12,6 +12,9 @@ from torchvision import utils as tvu
 from typing import List
 
 
+PATH = '/opt/ml/bucket-git/final-project-level3-cv-02/backend/app/inference/'
+
+
 def combine_option_call(command: str, options: str) -> None:
     subprocess.call(command + " " + options, shell=True)
 
@@ -68,8 +71,8 @@ def integrated_pipeline(path_original: str, path_sketch: str, width: int, height
     combine_option_call("python recommendation.py", path_options)
     combine_option_call("python ESRGAN.py", result_options)
 
-    return os.listdir(f"/opt/ml/generated/{random_id}_super_resolution")
-
+    return f"/opt/ml/generated/{random_id}_super_resolution"
+    
 
 if __name__ == '__main__':
     # Data those will be given from back-end
