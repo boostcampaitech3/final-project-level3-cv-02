@@ -3,12 +3,10 @@
 > [boostcamp AI Tech](https://boostcamp.connect.or.kr) - Level 3: CV_02 Bucket Interior
 
 
-## Introduction  - 나중에 수아님
+## Introduction 
 Samsung Bespoke, LG objet 등 고객들에게 맞춤형 가구 또는 인테리어를 제공해줄 수 있는 “퍼스널 인테리어” 서비스가 유행 중이기 때문에 최신 AI 기술을 도입하여 접근성이 높은 웹사이트로 제작해보고자 하였다.
 
 (주)내일의집은 사용자의 ‘방 사진’에 자유롭게 인테리어를 수정 또는 추가(스케치를 통해)하면, 이를 실제 모습처럼 보여주는 역할을 한다. 
-
-## 서비스 흐름도
 
 
 
