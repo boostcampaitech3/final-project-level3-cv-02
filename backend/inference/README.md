@@ -2,8 +2,8 @@
 
 ### How to use
 
-```shell
-python main.py -i {OUTPUT_FOLDER_NAME} --sample_step {NUM_STEP} --t {NOISE_SCALE} --path1 {ORIGINAL_IMAGE_PATH} --path2 {SKETCH_IMAGE_PATH}
+```python
+path = integrated_pipeline(path_original, path_sketch, width, height)
 ```
 
 Resolves #23, #27, #34, #35, #44
