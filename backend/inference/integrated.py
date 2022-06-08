@@ -15,8 +15,8 @@ from typing import List
 PATH = '/opt/ml/bucket-git/final-project-level3-cv-02/backend/inference/'
 
 
-def combine_option_call(command: str, options: str) -> None:
-    subprocess.call(command + " " + options, shell=True)
+def combine_option_call(file_name: str, options: str) -> None:
+    subprocess.call("python " + file_name + " " + options, shell=True)
 
 
 def crop_sketch_image(path_original: str, path_sketch: str) -> None:
@@ -57,7 +57,7 @@ def size_check(path_original: str, path_sketch: str, width: int, height: int) ->
         crop_sketch_image(path_original, path_sketch)
 
 
-def integrated_pipeline(path_original: str, path_sketch: str, width: int, height: int) -> List[str]:
+def integrated_pipeline(path_original: str, path_sketch: str, width: int, height: int) -> str:
     size_check(path_original, path_sketch, width, height)
 
     sha1 = hashlib.new('sha1')
@@ -67,9 +67,9 @@ def integrated_pipeline(path_original: str, path_sketch: str, width: int, height
     path_options = f"--path1 {path_original} --path2 {path_sketch} --save3 /opt/ml/generated/{random_id}"
     result_options = f"--save4 /opt/ml/generated/{random_id}_super_resolution --width {width} --height {height}"
 
-    combine_option_call("python SDEdit.py --sample_step 10 --t 500", path_options)
-    combine_option_call("python recommendation.py", path_options)
-    combine_option_call("python ESRGAN.py", result_options)
+    combine_option_call("SDEdit.py", path_options)
+    combine_option_call("recommendation.py", path_options)
+    combine_option_call("ESRGAN.py", result_options)
 
     return f"/opt/ml/generated/{random_id}_super_resolution"
     
@@ -80,4 +80,4 @@ if __name__ == '__main__':
     path_sketch = None
     width, height = (None, None)
 
-    paths = integrated_pipeline(path_original, path_sketch, width, height)
+    path = integrated_pipeline(path_original, path_sketch, width, height)

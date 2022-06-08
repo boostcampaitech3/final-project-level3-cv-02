@@ -15,14 +15,12 @@ def parse_args_and_config():
     parser = argparse.ArgumentParser(description=globals()['__doc__'])
     parser.add_argument('--config', type=str, default='bedroom.yml', help='Path to the config file')
     parser.add_argument('--seed', type=int, default=1234, help='Random seed')
-    parser.add_argument('--exp', type=str, default='./runs/', help='Path for saving running related data.')
     parser.add_argument('--comment', type=str, default='', help='A string for experiment comment')
     parser.add_argument('--verbose', type=str, default='info', help='Verbose level: info | debug | warning | critical')
     parser.add_argument('--sample', default=True, action='store_true', help='Whether to produce samples from the model')
-    parser.add_argument('-i', '--image_folder', type=str, default='images', help="The folder name of samples")
     parser.add_argument('--ni', default=True, action='store_true', help="No interaction. Suitable for Slurm Job launcher")
-    parser.add_argument('--sample_step', type=int, default=3, help='Total sampling steps')
-    parser.add_argument('--t', type=int, default=400, help='Sampling noise scale')
+    parser.add_argument('--sample_step', type=int, default=10, help='Total sampling steps')
+    parser.add_argument('--t', type=int, default=500, help='Sampling noise scale')
     parser.add_argument('--path1', type=str, default='/opt/ml/workspace/input/indoor_test_1_rescaled_512.png', help='Original image path')
     parser.add_argument('--path2', type=str, default='/opt/ml/workspace/input/indoor_test_1_input_512.png', help='Sketch image path')
     parser.add_argument('--save1', type=str, default='/opt/ml/SDEdit/original_image', help='Saving 256*256 original image path')
@@ -46,28 +44,9 @@ def parse_args_and_config():
     logger.addHandler(handler1)
     logger.setLevel(level)
 
-    os.makedirs(os.path.join(args.exp, 'image_samples'), exist_ok=True)
     os.makedirs(args.save1, exist_ok=True)
     os.makedirs(args.save2, exist_ok=True)
     os.makedirs(args.save3, exist_ok=True)
-    args.image_folder = os.path.join(args.exp, 'image_samples', args.image_folder)
-    if not os.path.exists(args.image_folder):
-        os.makedirs(args.image_folder)
-    else:
-        overwrite = False
-        if args.ni:
-            overwrite = True
-        else:
-            response = input("Image folder already exists. Overwrite? (Y/N)")
-            if response.upper() == 'Y':
-                overwrite = True
-
-        if overwrite:
-            shutil.rmtree(args.image_folder)
-            os.makedirs(args.image_folder)
-        else:
-            print("Output image folder exists. Program halted.")
-            sys.exit(0)
 
     # add device
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
