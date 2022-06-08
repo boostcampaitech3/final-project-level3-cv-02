@@ -21,15 +21,13 @@ def parse_args_and_config():
     parser.add_argument('--ni', default=True, action='store_true', help="No interaction. Suitable for Slurm Job launcher")
     parser.add_argument('--sample_step', type=int, default=10, help='Total sampling steps')
     parser.add_argument('--t', type=int, default=500, help='Sampling noise scale')
-    parser.add_argument('--path1', type=str, default='/opt/ml/workspace/input/indoor_test_1_rescaled_512.png', help='Original image path')
-    parser.add_argument('--path2', type=str, default='/opt/ml/workspace/input/indoor_test_1_input_512.png', help='Sketch image path')
-    parser.add_argument('--save1', type=str, default='/opt/ml/SDEdit/original_image', help='Saving 256*256 original image path')
-    parser.add_argument('--save2', type=str, default='/opt/ml/SDEdit/sketch_image', help='Saving 256*256 sketch image path')
-    parser.add_argument('--save3', type=str, default='/opt/ml/SDEdit/generated_image', help='Saving 256*256 generated image path')
+    parser.add_argument('--path1', type=str, help='Original image path')
+    parser.add_argument('--path2', type=str, help='Sketch image path')
+    parser.add_argument('--save_path', type=str, help='Saving 256*256 generated image path')
     args = parser.parse_args()
 
     # parse config file
-    with open(os.path.join('/opt/ml/bucket-git/final-project-level3-cv-02/backend/inference/configs', args.config), 'r') as f:
+    with open(args.config, 'r') as f:
         config = yaml.safe_load(f)
     new_config = dict2namespace(config)
 
@@ -44,9 +42,7 @@ def parse_args_and_config():
     logger.addHandler(handler1)
     logger.setLevel(level)
 
-    os.makedirs(args.save1, exist_ok=True)
-    os.makedirs(args.save2, exist_ok=True)
-    os.makedirs(args.save3, exist_ok=True)
+    os.makedirs(args.save_path, exist_ok=True)
 
     # add device
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')

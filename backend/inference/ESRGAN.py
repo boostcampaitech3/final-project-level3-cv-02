@@ -62,12 +62,12 @@ def resize_image(image, size: tuple):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--save4', type=str, help='Selected image path list')
+    parser.add_argument('--save_path', type=str, help='Selected image path list')
     parser.add_argument('--width', type=int, help='Image target width')
     parser.add_argument('--height', type=int, help='Image target height')
     args = parser.parse_args()
 
-    img_paths = os.listdir(args.save4)
+    img_paths = os.listdir(args.save_path)
     for cache in ['__pycache__', '.ipynb_checkpoints']:
         if cache in img_paths:
             img_paths.remove(cache)
@@ -78,7 +78,7 @@ if __name__ == '__main__':
 
     super_images = []
     for i in range(len(img_paths)):
-        image = preprocess_image(os.path.join(args.save4, img_paths[i]))
+        image = preprocess_image(os.path.join(args.save_path, img_paths[i]))
         image = resize_image(image, (args.width // 4, args.height // 4))
 
         super_image = model(image)
@@ -96,11 +96,11 @@ if __name__ == '__main__':
         fig.tight_layout()
         plot_image(tf.squeeze(super_image), str(super_image.shape))
 
-    plt.savefig(os.path.join(args.save4, 'result.png'), dpi=150)
+    plt.savefig(os.path.join(args.save_path, 'result.png'), dpi=150)
 
     super_images_paths = []
     for index, super_image in enumerate(super_images):
-        tf.keras.preprocessing.image.save_img(os.path.join(args.save4, f"bedroom_upscaled_{index}.png"), super_image)
+        tf.keras.preprocessing.image.save_img(os.path.join(args.save_path, f"bedroom_upscaled_{index}.png"), super_image)
 
     for image_path in img_paths:
-        os.remove(os.path.join(args.save4, image_path))
+        os.remove(os.path.join(args.save_path, image_path))
