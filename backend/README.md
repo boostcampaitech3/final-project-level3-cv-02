@@ -5,7 +5,7 @@
 ```shell
 cd backend \
 poetry install \    # 의존성 패키지 설치
-peotry shell        # 가상환경 활성화
+poetry shell        # 가상환경 활성화
 ```
 
 ### Run
