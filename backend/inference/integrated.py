@@ -10,7 +10,7 @@ from torchvision import transforms
 from torchvision import utils as tvu
 
 
-PATH = '/opt/ml/bucket-git/final-project-level3-cv-02/backend/app/inference/'
+base_path = '/opt/ml/bucket-git'
 
 
 def combine_option_call(file_name: str, options: str) -> None:
@@ -62,15 +62,16 @@ def integrated_pipeline(path_original: str, path_sketch: str, width: int, height
     sha1.update(path_original.encode('utf-8'))
     random_id = sha1.hexdigest()[:8]
 
-    path_options = f"--path1 {path_original} --path2 {path_sketch} --save_path /opt/ml/generated/{random_id}"
-    result_options = f"--save_path /opt/ml/generated/{random_id}_super_resolution --width {width} --height {height}"
+    config_options = "--config inference/configs/bedroom.yml"
+    path_options = f"--path1 {path_original} --path2 {path_sketch} --save_path {base_path}/generated/{random_id}"
+    result_options = f"--save_path {base_path}/generated/{random_id}_super_resolution --width {width} --height {height}"
 
-    combine_option_call("SDEdit.py", path_options)
+    combine_option_call("SDEdit.py", config_options + path_options)
     combine_option_call("recommendation.py", path_options)
     combine_option_call("ESRGAN.py", result_options)
 
-    return f"/opt/ml/generated/{random_id}_super_resolution"
-    
+    return f"{base_path}/generated/{random_id}_super_resolution"
+
 
 if __name__ == '__main__':
     # Data those will be given from back-end
