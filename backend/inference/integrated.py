@@ -12,7 +12,7 @@ from torchvision import utils as tvu
 from typing import List
 
 
-PATH = '/opt/ml/bucket-git/final-project-level3-cv-02/backend/app/inference/'
+PATH = '/opt/ml/bucket-git/final-project-level3-cv-02/backend/inference/'
 
 
 def combine_option_call(command: str, options: str) -> None:
