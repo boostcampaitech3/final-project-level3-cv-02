@@ -9,8 +9,6 @@ import torch
 from torchvision import transforms
 from torchvision import utils as tvu
 
-from typing import List
-
 
 PATH = '/opt/ml/bucket-git/final-project-level3-cv-02/backend/app/inference/'
 
@@ -64,8 +62,8 @@ def integrated_pipeline(path_original: str, path_sketch: str, width: int, height
     sha1.update(path_original.encode('utf-8'))
     random_id = sha1.hexdigest()[:8]
 
-    path_options = f"--path1 {path_original} --path2 {path_sketch} --save3 /opt/ml/generated/{random_id}"
-    result_options = f"--save4 /opt/ml/generated/{random_id}_super_resolution --width {width} --height {height}"
+    path_options = f"--path1 {path_original} --path2 {path_sketch} --save_path /opt/ml/generated/{random_id}"
+    result_options = f"--save_path /opt/ml/generated/{random_id}_super_resolution --width {width} --height {height}"
 
     combine_option_call("SDEdit.py", path_options)
     combine_option_call("recommendation.py", path_options)
