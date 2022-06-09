@@ -51,7 +51,6 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-# ========================================
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG_DIR = os.path.join(BASE_DIR, 'static/')
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates/')
