@@ -9,10 +9,13 @@ import torch
 from torchvision import transforms
 from torchvision import utils as tvu
 
-from typing import List
 
+<<<<<<< HEAD
 
 PATH = '/opt/ml/bucket-git/final-project-level3-cv-02/backend/inference/'
+=======
+base_path = '/opt/ml/bucket-git'
+>>>>>>> 8e297870e71f403cfa29f14229995cfd9116ef27
 
 
 def combine_option_call(file_name: str, options: str) -> None:
@@ -64,15 +67,22 @@ def integrated_pipeline(path_original: str, path_sketch: str, width: int, height
     sha1.update(path_original.encode('utf-8'))
     random_id = sha1.hexdigest()[:8]
 
-    path_options = f"--path1 {path_original} --path2 {path_sketch} --save3 /opt/ml/generated/{random_id}"
-    result_options = f"--save4 /opt/ml/generated/{random_id}_super_resolution --width {width} --height {height}"
+    config_options = "--config inference/configs/bedroom.yml"
+    path_options = f"--path1 {path_original} --path2 {path_sketch} --save_path {base_path}/generated/{random_id}"
+    result_options = f"--save_path {base_path}/generated/{random_id}_super_resolution --width {width} --height {height}"
 
+<<<<<<< HEAD
     combine_option_call("inference/SDEdit.py", path_options)
     combine_option_call("inference/recommendation.py", path_options)
     combine_option_call("inference/ESRGAN.py", result_options)
+=======
+    combine_option_call("SDEdit.py", config_options + path_options)
+    combine_option_call("recommendation.py", path_options)
+    combine_option_call("ESRGAN.py", result_options)
+>>>>>>> 8e297870e71f403cfa29f14229995cfd9116ef27
 
-    return f"/opt/ml/generated/{random_id}_super_resolution"
-    
+    return f"{base_path}/generated/{random_id}_super_resolution"
+
 
 if __name__ == '__main__':
     # Data those will be given from back-end

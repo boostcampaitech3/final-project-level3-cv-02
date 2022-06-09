@@ -66,7 +66,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--path1', type=str, help='Original image path')
     parser.add_argument('--path2', type=str, help='Sketch image path')
-    parser.add_argument('--save3', type=str, help='Saving 256*256 generated image path')
+    parser.add_argument('--save_path', type=str, help='Saving 256*256 generated image path')
     args = parser.parse_args()
 
     image_num = 0
@@ -152,7 +152,7 @@ if __name__ == '__main__':
         # print(f"Class {pred[0]}: {image_label[pred[0]]}")
 
     result = [i for i in range(48 * int(image_num), 48 * int(image_num) + 80)]
-    path = args.save3 + "/bedroom_generated_"
+    path = args.save_path + "/bedroom_generated_"
 
     # 생성된 모든 그림에 대해서 원하는 category에 대한 logit 찾기
     logits = np.ones(len(result))
@@ -242,8 +242,8 @@ if __name__ == '__main__':
 
     # print(selected_image_paths)
 
-    os.mkdir(args.save3 + "_super_resolution")
+    os.mkdir(args.save_path + "_super_resolution")
     for selected_image_path in selected_image_paths:
-        shutil.copy(selected_image_path, args.save3 + "_super_resolution")
+        shutil.copy(selected_image_path, args.save_path + "_super_resolution")
 
-    shutil.rmtree(args.save3)
+    shutil.rmtree(args.save_path)

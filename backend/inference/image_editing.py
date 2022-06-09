@@ -161,5 +161,5 @@ class Diffusion(object):
                 for i in range(8):
                     tvu.save_image(
                         (x[i] + 1) * 0.5, 
-                        os.path.join(self.args.save3, f'bedroom_generated_{image_idx:04d}.png'))
+                        os.path.join(self.args.save_path, f'bedroom_generated_{image_idx:04d}.png'))
                     image_idx += 1
