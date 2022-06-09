@@ -51,11 +51,10 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-# ========================================
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG_DIR = os.path.join(BASE_DIR, 'static/')
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates/')
-SERVER_IMG_DIR = os.path.join('gs://bucket-interior/','images/')
+SERVER_IMG_DIR = os.path.join('gs://bucket-interior-strorage/','images/')
 templates = Jinja2Templates(directory=TEMPLATE_DIR)
 
 # GCS private key
@@ -84,7 +83,7 @@ def get_user(db: Session = Depends(get_db)):
 ## frontend에서 데이터 받아오기
 @app.post('/')
 async def get_form(request: Request, db: Session = Depends(get_db)):
-    file_url = "https://storage.cloud.google.com/bucket-interior/images/" 
+    file_url = "https://storage.cloud.google.com/bucket-interior-storage/images/" 
 
     loading = True
     item = await request.form()
@@ -179,7 +178,7 @@ def run_model(orignal_path: str, sketch_path: str, width: int, height: int):
     return output_path
 
 def upload_image(local_path:str, user_name:str, image_name:str):
-    bucket = client.bucket('bucket-interior')
+    bucket = client.bucket('bucket-interior-storage')
     blob = bucket.blob(os.path.join(os.path.join('images/', user_name), image_name))
     blob.upload_from_filename(local_path)
 
