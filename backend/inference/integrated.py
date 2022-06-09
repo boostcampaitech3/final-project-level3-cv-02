@@ -46,7 +46,7 @@ def crop_sketch_image(path_original: str, path_sketch: str) -> None:
 def size_check(path_original: str, path_sketch: str, width: int, height: int) -> None:
     width_original, height_original = Image.open(path_original).size
     width_sketch, height_sketch = Image.open(path_sketch).size
-    assert (width_original, height_original) == (width, height), 'Given size does not match with original image size'
+    # assert (width_original, height_original) == (width, height), 'Given size does not match with original image size'
 
     # Pass 1/9 case: original image size matches with sketch image size
     # Reject 5/9 cases: original image is broader or longer than sketch image
@@ -67,9 +67,9 @@ def integrated_pipeline(path_original: str, path_sketch: str, width: int, height
     path_options = f"--path1 {path_original} --path2 {path_sketch} --save3 /opt/ml/generated/{random_id}"
     result_options = f"--save4 /opt/ml/generated/{random_id}_super_resolution --width {width} --height {height}"
 
-    combine_option_call("SDEdit.py", path_options)
-    combine_option_call("recommendation.py", path_options)
-    combine_option_call("ESRGAN.py", result_options)
+    combine_option_call("inference/SDEdit.py", path_options)
+    combine_option_call("inference/recommendation.py", path_options)
+    combine_option_call("inference/ESRGAN.py", result_options)
 
     return f"/opt/ml/generated/{random_id}_super_resolution"
     
