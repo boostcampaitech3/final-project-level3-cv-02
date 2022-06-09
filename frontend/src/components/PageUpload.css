@@ -1,0 +1,227 @@
+.Upload-background {
+    background-color: rgb(255, 255, 255);
+    height: 120vh;
+    text-align: center;
+    -webkit-animation: upload-fade-in-02 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: upload-fade-in-02 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+.Upload-background-ani {
+    background-color: rgb(255, 255, 255);
+    height: 90vh;
+    text-align: center;
+    visibility: hidden;
+}
+
+.Upload-logo {
+  position: relative;
+  top: 10%;
+  width: 4%;
+}
+
+.Upload-background-title {
+    position: relative;
+    top: 10%;
+    font-weight: 550;
+    font-family: fantasy;
+}
+
+.Upload-title {
+    position: relative;
+    font-size: 2.5vh;
+    font-weight: 500;
+    top: -20%;
+}
+
+.Upload-form {
+    display: inline-block;
+    width: 70%;
+    height: 50%;
+    position: relative;
+    top: 20%;
+}
+
+.Upload-original {
+    position: relative;
+    float: left;
+    width: 30%;
+    height: 70%;
+    left: 15%;
+    border-style: groove;
+    border-radius: 30px;
+}
+
+.Upload-sketch {
+    position: relative;
+    float: right;
+    width: 30%;
+    height: 70%;
+    right: 15%;
+    border-style: groove;
+    border-radius: 30px;
+}
+
+.File-upload-img {
+    max-width: 70%;
+    max-height: 70%;
+    width: auto;
+    height: auto;
+    position: relative;
+    top: -10%;
+}
+
+.Upload-email {
+    background-color: #f9f1e9;
+    position: relative;
+    float: left;
+    top: 85%;
+    height: 4vh;
+    width: 25%;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    padding-left: 2%;
+    padding-right: 2%;
+    color: gray;
+    font-size: 15px;
+}
+
+.Upload-submit {
+    background-color: rgb(227, 227, 227);
+    position: relative;
+    float: right;
+    top: 85%;
+    right: 2%;
+    border: none;
+    border-radius: 10px;
+    width: 6%;
+    height: 4vh;
+    color: rgb(73, 73, 73);
+    font-size: 15px;
+}
+
+.Upload-submit:hover {
+    cursor: pointer;
+    -webkit-animation: upload-submit-fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: upload-submit-fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+#Upload-original-sub, #Upload-sketch-sub {
+    cursor: pointer;
+    position: relative;
+    top: 5%;
+}
+
+#Upload-original-button, #Upload-sketch-button {
+    display: none;
+}
+
+.Upload-original:hover, .Upload-sketch:hover {
+    background-color: rgb(238, 238, 238);
+    -webkit-animation: upload-fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: upload-fade-in 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+.toast {
+    background-color:#f9f1e9 !important;
+    color: rgb(73, 73, 73) !important;
+}
+
+.Upload-guideline {
+  position: relative;
+  top: 12vh;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  font-size: 2vh;
+  color: rgb(78, 46, 21);
+  text-decoration: underline;
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+}
+
+.Upload-guideline:hover {
+  cursor: pointer;
+  -webkit-animation: upload-button 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: upload-button 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+
+
+
+/* Animation */
+
+@-webkit-keyframes upload-fade-in {
+    0% {
+      background-color: white;
+    }
+    100% {
+      background-color: rgb(238, 238, 238);
+    }
+  }
+  @keyframes upload-fade-in {
+    0% {
+      background-color: white;
+    }
+    100% {
+      background-color: rgb(238, 238, 238);
+    }
+  }
+
+  @-webkit-keyframes upload-fade-in-02 {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes upload-fade-in-02 {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes upload-button {
+    0% {
+      background-color: rgba(0, 0, 0, 0);
+      color: rgb(78, 46, 21);
+    }
+    100% {
+      background-color: rgba(84, 64, 49, 0.742);
+      color: white;
+    }
+  }
+  @keyframes upload-button {
+    0% {
+      background-color: rgba(0, 0, 0, 0);
+      color: rgb(78, 46, 21);
+    }
+    100% {
+      background-color: rgba(84, 64, 49, 0.742);
+      color: white;
+    }
+  }
+
+  @-webkit-keyframes upload-submit-fade-in {
+    0% {
+      background-color: rgb(227, 227, 227);
+      color: rgb(73, 73, 73);
+    }
+    100% {
+      background-color: rgb(73, 73, 73);
+      color: white;
+    }
+  }
+  @keyframes upload-submit-fade-in {
+    0% {
+      background-color: rgb(227, 227, 227);
+      color: rgb(73, 73, 73);
+    }
+    100% {
+      background-color: rgb(73, 73, 73);
+      color: white;
+    }
+  }
