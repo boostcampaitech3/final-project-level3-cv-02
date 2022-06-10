@@ -33,13 +33,13 @@
 
 ### 서비스 측면
 
-![image](https://user-images.githubusercontent.com/63588046/170953378-f07697bb-cd34-42ec-b8e9-b657c50a3e0c.png)
+![image](/static/service_architecture_user.png)
 
 (To be replaced)
 
 ### 기술 측면
 
-![image](https://user-images.githubusercontent.com/56240088/171679444-4482c0c5-9255-4bf3-9692-6eccfdb50b70.png)
+![image](/static/service_architecture_tech.png)
 
 ## Data
 
@@ -92,19 +92,19 @@
 
 #### Original Image
 
-![image](https://user-images.githubusercontent.com/63588046/169933470-013b395b-e2d8-453c-9d65-b79b078a9baa.png)
+![super-resolution-demo-original](/static/original.png)
 
 #### ESRGAN
 
-![image](https://user-images.githubusercontent.com/63588046/171135605-00a9eea0-c611-4eb0-96cc-3799f1834e4a.png)
+![super-resolution-demo-esrgan](/static/esrgan.png)
 
 #### EDSR
 
-![image](https://user-images.githubusercontent.com/63588046/169933922-12371538-5fb9-4e6f-84bc-9a08542559e9.png)
+![super-resolution-demo-edsr](/static/edsr.png)
 
 #### CAR
 
-![image](https://user-images.githubusercontent.com/63588046/171135260-90233af8-3186-4b27-94f1-24ee90202810.png)
+![super-resolution-demo-car](/static/car.png)
 
 ## 프로젝트 장점 및 기대 효과
 
@@ -122,13 +122,20 @@
 ## Author
 
 |김예원|김주연|김주영|유환규|이수아|
-|:-:|:-:|:-:|:-:|:-:|
-|[Github](https://github.com/Yewon-dev)|[Github](https://github.com/zooyeonii)|[Github](https://github.com/nestiank)|[Github](https://github.com/hkyoo52)|[Github](https://github.com/heosuab)
+|:----:|:----:|:----:|:----:|:----:|
+|[GitHub][yewon]|[GitHub][juyeon]|[GitHub][juyoung]|[GitHub][hwankyu]|[GitHub][sua]|
 
 ## References
 
   * SDEdit
     * [Paper](https://arxiv.org/abs/2108.01073)
-    * [Github](https://github.com/ermongroup/SDEdit)
-  * Score modeling [link](https://arxiv.org/abs/1907.05600)
-  * Score-based SDE [link](https://arxiv.org/abs/2011.13456)
+    * [GitHub](https://github.com/ermongroup/SDEdit)
+  * [Score Modeling](https://arxiv.org/abs/1907.05600)
+  * [Score-Based SDE](https://arxiv.org/abs/2011.13456)
+
+<!-- Links: GitHub Profiles -->
+[yewon]: https://github.com/Yewon-dev
+[juyeon]: https://github.com/zooyeonii
+[juyoung]: https://github.com/nestiank
+[hwankyu]: https://github.com/hkyoo52
+[sua]: https://github.com/heosuab
