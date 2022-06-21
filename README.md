@@ -27,15 +27,15 @@
 
 ## 시연 영상
 
-(To be uploaded)
+[![내일의집 시연 영상](https://res.cloudinary.com/marcomontalbano/image/upload/v1655805746/video_to_markdown/images/youtube--M57tLcO3A3c-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/M57tLcO3A3c "내일의집 시연 영상")
+
+<!-- Thanks to https://github.com/marcomontalbano/video-to-markdown -->
 
 ## 서비스 아키텍쳐
 
 ### 서비스 측면
 
 ![image](/static/service_architecture_user.png)
-
-(To be replaced)
 
 ### 기술 측면
 
