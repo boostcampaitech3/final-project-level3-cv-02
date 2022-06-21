@@ -148,11 +148,15 @@ FastAPI를 사용하였고, 이미지는 Google Cloud Storage에 저장하면서
   * 웹페이지에서 이미지에 바로 스케치할 수 있도록 웹페이지를 개선할 수 있을 것입니다.
   * 연관 상품을 찾아서 구매 링크를 추천해 줄 수 있을 것입니다.
 
-## Author
+## Contributors
 
-|김예원|김주연|김주영|유환규|이수아|
-|:----:|:----:|:----:|:----:|:----:|
-|[GitHub][yewon]|[GitHub][juyeon]|[GitHub][juyoung]|[GitHub][hwankyu]|[GitHub][sua]|
+| 이름 | 캠퍼 ID | GitHub | 역할 |
+| ---- | ------ | ------ | ---- |
+| 김예원 | T3041 | [*Link*][yewon] | **Back-end(FastAPI, GCS, SQLite), DB 설계**<br>Front-end 코드 리뷰, 모델링 작업 검토 |
+| 김주연<br>(Special Thanks) | T3052 | [*Link*][juyeon] | **프로젝트 아이디어 제안 및 고도화**<br>프로젝트 아이디어를 통해 팀원 모집 및 팀 구성 주도 |
+| 김주영 | T3053 | [*Link*][juyoung] | **모델링(SDEdit)**, 모델링 코드 리뷰<br>Front-end, Back-end 작업 검토<br>GitHub 관리 |
+| 유환규 | T3134 | [*Link*][hwankyu] | **모델링(CNN, ESRGAN)**, 모델링 코드 리뷰<br>Front-end, Back-end 작업 검토 |
+| 이수아 | T3153 | [*Link*][sua] | **프론트엔드(React.js)**<br>Back-end 코드 리뷰, 모델링 작업 검토<br>초기 SDEdit 코드 작성 |
 
 ## References
 
