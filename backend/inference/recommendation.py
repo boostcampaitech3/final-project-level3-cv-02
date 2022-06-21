@@ -75,7 +75,7 @@ if __name__ == '__main__':
     sketch_path = args.path2
 
     # 이미지 불러오기
-    img_original = load_img(origin_path)
+    # img_original = load_img(origin_path)
     img_sketch = load_img(sketch_path)
 
     mask = extract_mask(origin_path, sketch_path)
@@ -132,7 +132,7 @@ if __name__ == '__main__':
     # 마스크 부분을 모델에 넣기 -> category 찾기
     preds = []
     for object_idx in range(len(mask_pixel_list)):
-        img = make_mask(img_original, x_y_min[object_idx], x_y_max[object_idx])
+        img = make_mask(img_sketch, x_y_min[object_idx], x_y_max[object_idx])
         img = img.permute(1, 2, 0)
 
         mask = torch.zeros((img.size()[1], img.size()[2]))
@@ -198,7 +198,6 @@ if __name__ == '__main__':
             cosine_similarities[file_idx] *= (cos_sim(mask_sketch, mask_generated) + 0.5)
 
             if torch.cuda.is_available():
-                mask_sketch = mask_sketch.to('cuda', dtype=torch.float)
                 mask_generated = mask_generated.to('cuda', dtype=torch.float)
 
             # 물체를 새로 그린 경우: 물체에 맞는 ImageNet label 넣기
