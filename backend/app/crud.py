@@ -2,7 +2,8 @@ from sqlalchemy.orm import Session
 
 from . import models, schemas
 
-# FE에서 DATA 받아올 때
+
+# FE에서 DATA 받아 올 때
 def create_user(db: Session, user: schemas.UserCreate):
     db_user = models.User(
         name=user.name,
@@ -20,6 +21,7 @@ def create_user(db: Session, user: schemas.UserCreate):
     db.refresh(db_user)
     return db_user
 
+
 # DB에 output_img 저장
 def update_user(db: Session, user_name: str, output_img: str):
     db_user = db.query(models.User).filter(models.User.name == user_name).first()
@@ -29,6 +31,6 @@ def update_user(db: Session, user_name: str, output_img: str):
     db.refresh(db_user)
     return db_user
 
+
 def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
-
