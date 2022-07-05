@@ -27,6 +27,38 @@
 
 ![image](/static/results.png)
 
+## 구동 방법
+
+Google Cloud Storage 인스턴스를 사전에 하나 준비해 주세요. 나머지 구동 과정은 매우 간단합니다.
+
+### 백엔드: Poetry 가상 환경 활성화 및 GPU 서버 구동
+
+GPU가 준비된 서버에서 다음을 실행하면 됩니다.
+
+```shell
+cd backend \
+poetry install \ # 의존성 패키지 설치
+poetry shell     # 가상환경 활성화
+
+python3 -m app
+```
+
+자세한 내용은 [백엔드 README](backend/README.md)를 확인해 주세요.
+
+### 모델: 백엔드 폴더 내에 내장되어 연계 구동
+
+자세한 내용은 [모델 README](backend/inference/README.md)를 확인해 주세요.
+
+### 프론트엔드: 웹 서버 구동
+
+웹 서버로 사용할 서버에서 다음을 실행하면 됩니다.
+
+```shell
+npm run start
+```
+
+자세한 내용은 [프론트엔드 README](frontend/README.md)를 확인해 주세요.
+
 ## 서비스 아키텍쳐
 
 ### 서비스 측면
