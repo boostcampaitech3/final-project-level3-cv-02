@@ -3,10 +3,10 @@
 ### How to use
 
 ```python
-path = integrated_pipeline(path_original, path_sketch, width, height)
+path = integrated_pipeline(original_path, sketch_path, width, height)
 ```
 
-Resolves #23, #27, #34, #35, #44
+Resolves #23, #27, #34, #35, #44, #51
 
 ### Reference
 
