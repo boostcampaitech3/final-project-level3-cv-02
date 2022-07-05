@@ -25,7 +25,7 @@
 
 ## 프로젝트 결과
 
-![image](/static/results.PNG)
+![image](/static/results.png)
 
 ## 서비스 아키텍쳐
 
