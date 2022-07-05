@@ -1,9 +1,7 @@
 import argparse
 import traceback
-import shutil
 import logging
 import yaml
-import sys
 import os
 import torch
 import numpy as np
@@ -11,7 +9,7 @@ import numpy as np
 from image_editing import Diffusion
 
 
-def parse_args_and_config():
+def parse_args_and_config(original_path: str, sketch_path: str, save_path: str):
     parser = argparse.ArgumentParser(description=globals()['__doc__'])
     parser.add_argument('--config', type=str, default='bedroom.yml', help='Path to the config file')
     parser.add_argument('--seed', type=int, default=1234, help='Random seed')
@@ -21,9 +19,9 @@ def parse_args_and_config():
     parser.add_argument('--ni', default=True, action='store_true', help="No interaction. Suitable for Slurm Job launcher")
     parser.add_argument('--sample_step', type=int, default=10, help='Total sampling steps')
     parser.add_argument('--t', type=int, default=500, help='Sampling noise scale')
-    parser.add_argument('--path1', type=str, help='Original image path')
-    parser.add_argument('--path2', type=str, help='Sketch image path')
-    parser.add_argument('--save_path', type=str, help='Saving 256*256 generated image path')
+    parser.add_argument('--original_path', type=str, default=original_path, help='Original image path')
+    parser.add_argument('--sketch_path', type=str, default=sketch_path, help='Sketch image path')
+    parser.add_argument('--save_path', type=str, default=save_path, help='Saving 256*256 generated image path')
     args = parser.parse_args()
 
     # parse config file
@@ -71,8 +69,8 @@ def dict2namespace(config):
     return namespace
 
 
-def main():
-    args, config = parse_args_and_config()
+def generator(original_path: str = None, sketch_path: str = None, save_path: str = None) -> None:
+    args, config = parse_args_and_config(original_path, sketch_path, save_path)
     print(">" * 80)
     logging.info("Exp instance id = {}".format(os.getpid()))
     logging.info("Exp comment = {}".format(args.comment))
@@ -81,12 +79,10 @@ def main():
 
     try:
         runner = Diffusion(args, config)
-        runner.image_editing_sample(args.path1, args.path2)
+        runner.image_editing_sample(original_path, sketch_path)
     except Exception:
         logging.error(traceback.format_exc())
 
-    return 0
-
 
 if __name__ == '__main__':
-    sys.exit(main())
+    generator()

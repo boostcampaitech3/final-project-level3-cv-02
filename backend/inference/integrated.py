@@ -1,6 +1,4 @@
 import os
-import subprocess
-
 import hashlib
 
 from PIL import Image
@@ -9,17 +7,17 @@ import torch
 from torchvision import transforms
 from torchvision import utils as tvu
 
+from SDEdit import generator
+from recommendation import recommender
+from ESRGAN import upscaler
+
 
 base_path = '/opt/ml/bucket-git'
 
 
-def combine_option_call(file_name: str, options: str) -> None:
-    subprocess.call("python " + file_name + " " + options, shell=True)
-
-
-def crop_sketch_image(path_original: str, path_sketch: str) -> None:
-    img_original = Image.open(path_original).convert('RGB')
-    img_sketch = Image.open(path_sketch).convert('RGB')
+def crop_sketch_image(original_path: str, sketch_path: str) -> None:
+    img_original = Image.open(original_path).convert('RGB')
+    img_sketch = Image.open(sketch_path).convert('RGB')
 
     width_original, height_original = img_original.size
     width_sketch, height_sketch = img_sketch.size
@@ -37,13 +35,13 @@ def crop_sketch_image(path_original: str, path_sketch: str) -> None:
                 min = pred
                 img_sketch = candidate
 
-    os.remove(path_sketch)
-    tvu.save_image(img_sketch, path_sketch)
+    os.remove(sketch_path)
+    tvu.save_image(img_sketch, sketch_path)
 
 
-def size_check(path_original: str, path_sketch: str, width: int, height: int) -> None:
-    width_original, height_original = Image.open(path_original).size
-    width_sketch, height_sketch = Image.open(path_sketch).size
+def size_check(original_path: str, sketch_path: str, width: int, height: int) -> None:
+    width_original, height_original = Image.open(original_path).size
+    width_sketch, height_sketch = Image.open(sketch_path).size
     # assert (width_original, height_original) == (width, height), 'Given size does not match with original image size'
 
     # Pass 1/9 case: original image size matches with sketch image size
@@ -52,31 +50,31 @@ def size_check(path_original: str, path_sketch: str, width: int, height: int) ->
         raise Exception('Original image is larger than sketch image')
     # Fix 3/9 cases: original image is narrower or shorter than sketch image
     if width_original < width_sketch or height_original < height_sketch:
-        crop_sketch_image(path_original, path_sketch)
+        crop_sketch_image(original_path, sketch_path)
 
 
-def integrated_pipeline(path_original: str, path_sketch: str, width: int, height: int) -> str:
-    size_check(path_original, path_sketch, width, height)
+def integrated_pipeline(original_path: str, sketch_path: str, width: int, height: int) -> str:
+    size_check(original_path, sketch_path, width, height)
 
     sha1 = hashlib.new('sha1')
-    sha1.update(path_original.encode('utf-8'))
+    sha1.update(original_path.encode('utf-8'))
     random_id = sha1.hexdigest()[:8]
 
-    config_options = "--config inference/configs/bedroom.yml"
-    path_options = f"--path1 {path_original} --path2 {path_sketch} --save_path {base_path}/generated/{random_id}"
-    result_options = f"--save_path {base_path}/generated/{random_id}_super_resolution --width {width} --height {height}"
+    save_path = f"{base_path}/generated/{random_id}"
+    generator(original_path, sketch_path, save_path)
+    recommender(original_path, sketch_path, save_path)
 
-    combine_option_call("inference/SDEdit.py", path_options)
-    combine_option_call("inference/recommendation.py", path_options)
-    combine_option_call("inference/ESRGAN.py", result_options)
+    save_path += "_super_resolution"
+    upscaler(save_path, width, height)
 
-    return f"{base_path}/generated/{random_id}_super_resolution"
+    return save_path
 
 
+# Execution example code (not for service)
 if __name__ == '__main__':
     # Data those will be given from back-end
-    path_original = None
-    path_sketch = None
+    original_path = None
+    sketch_path = None
     width, height = (None, None)
 
-    path = integrated_pipeline(path_original, path_sketch, width, height)
+    path = integrated_pipeline(original_path, sketch_path, width, height)

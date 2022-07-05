@@ -5,7 +5,7 @@ import shutil
 from PIL import Image
 from torchvision import transforms
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import torch
 import torchvision
 import numpy as np
@@ -62,23 +62,14 @@ def extract_mask(input_original, input_sketch):
     return mask_tensor[0] * mask_tensor[1] * mask_tensor[2]
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--path1', type=str, help='Original image path')
-    parser.add_argument('--path2', type=str, help='Sketch image path')
-    parser.add_argument('--save_path', type=str, help='Saving 256*256 generated image path')
-    args = parser.parse_args()
-
+def recommender(original_path: str, sketch_path: str, save_path: str) -> None:
     image_num = 0
 
-    origin_path = args.path1
-    sketch_path = args.path2
-
     # 이미지 불러오기
-    # img_original = load_img(origin_path)
+    # img_original = load_img(original_path)
     img_sketch = load_img(sketch_path)
 
-    mask = extract_mask(origin_path, sketch_path)
+    mask = extract_mask(original_path, sketch_path)
 
     # 마스크 부분 직사각형 구하기
     # 0: Not visited mask
@@ -86,10 +77,11 @@ if __name__ == '__main__':
     visited = copy.deepcopy(mask)
     mask_pixel_list = []
 
+    # 마스크 부분 전처리
+    # 노이즈 제거, 마스크 데이터만 따로 보아서 저장
     dx = [-1, -1, -1, 0, 0, 1, 1, 1]
     dy = [-1, 0, 1, -1, 1, -1, 0, 1]
 
-    # 마스크 부분 전처리(노이즈 제거, 마스크 데이터만 따로 보아서 저장)
     def bfs(i, j):
         count = 1
         change_list = []
@@ -129,7 +121,7 @@ if __name__ == '__main__':
     # 모델 불러오기
     model = torchvision.models.resnet18(pretrained=True)
 
-    # 마스크 부분을 모델에 넣기 -> category 찾기
+    # 마스크 부분을 모델에 넣어서 category 찾기
     preds = []
     for object_idx in range(len(mask_pixel_list)):
         img = make_mask(img_sketch, x_y_min[object_idx], x_y_max[object_idx])
@@ -152,7 +144,7 @@ if __name__ == '__main__':
         # print(f"Class {pred[0]}: {image_label[pred[0]]}")
 
     result = [i for i in range(48 * int(image_num), 48 * int(image_num) + 80)]
-    path = args.save_path + "/bedroom_generated_"
+    path = save_path + "/bedroom_generated_"
 
     # 생성된 모든 그림에 대해서 원하는 category에 대한 logit 찾기
     logits = np.ones(len(result))
@@ -241,8 +233,17 @@ if __name__ == '__main__':
 
     # print(selected_image_paths)
 
-    os.mkdir(args.save_path + "_super_resolution")
+    os.mkdir(save_path + "_super_resolution")
     for selected_image_path in selected_image_paths:
-        shutil.copy(selected_image_path, args.save_path + "_super_resolution")
+        shutil.copy(selected_image_path, save_path + "_super_resolution")
 
-    shutil.rmtree(args.save_path)
+    shutil.rmtree(save_path)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=globals()['__doc__'])
+    parser.add_argument('--original_path', type=str, help='Original image path')
+    parser.add_argument('--sketch_path', type=str, help='Sketch image path')
+    parser.add_argument('--save_path', type=str, help='Saving 256*256 generated image path')
+    args = parser.parse_args()
+
+    recommender(args.original_path, args.sketch_path, args.save_path)
