@@ -11,7 +11,6 @@ from typing import Any, Dict, List, Optional, Union
 from uuid import UUID, uuid4
 
 import aiofiles
-import torch
 import uvicorn
 from dotenv import load_dotenv
 from fastapi import (BackgroundTasks, FastAPI, File, Form, Request, Response,
@@ -25,7 +24,6 @@ from google.cloud import storage
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
-
 from inference.integrated import integrated_pipeline
 from . import crud, models, schemas
 from .database import SessionLocal, engine, get_db
@@ -36,6 +34,8 @@ app = FastAPI()
 load_dotenv()
 
 client = storage.Client()
+
+global loading
 loading = False
 
 origins = [
@@ -79,13 +79,16 @@ def get_user(db: Session = Depends(get_db)):
     return {"data": result}
 
 
-
-## frontend에서 데이터 받아오기
+# Front-end에서 데이터 받아 오기
 @app.post('/')
 async def get_form(request: Request, db: Session = Depends(get_db)):
-    file_url = "https://storage.cloud.google.com/bucket-interior-storage/images/" 
+    '''
+    file_url = "https://storage.cloud.google.com/bucket-interior-storage/images/"
+    '''
 
+    global loading
     loading = True
+
     item = await request.form()
 
     email = item['submit_email']
@@ -101,26 +104,26 @@ async def get_form(request: Request, db: Session = Depends(get_db)):
     sketch_img_height = item['sketch_image_height']
     timestamp = item['upload_time']
 
-    # unique한 user dir 만들기
+    # Unique한 user dir 만들기
     user_name = name + '_' + str(timestamp)
     user_dir = os.path.join(IMG_DIR, user_name)
     os.makedirs(user_dir)
 
-    # local path 
-    file_location_o = os.path.join(user_dir, original_img_name)
-    file_location_s = os.path.join(user_dir, sketch_img_name)
+    # Local path 
+    file_location_original = os.path.join(user_dir, original_img_name)
+    file_location_sketch = os.path.join(user_dir, sketch_img_name)
 
-    # download to local
-    async with aiofiles.open(file_location_o, "wb") as buffer:
+    # Downloading to local
+    async with aiofiles.open(file_location_original, "wb") as buffer:
         img = await original_img.read()
         await buffer.write(img)
-    async with aiofiles.open(file_location_s, "wb") as buffer:
+    async with aiofiles.open(file_location_sketch, "wb") as buffer:
         img2 = await sketch_img.read()
         await buffer.write(img2)
-    
+
     # upload to bucket
-    original_url = upload_image(file_location_o, user_name, original_img_name)
-    sketch_url = upload_image(file_location_s, user_name, sketch_img_name)
+    original_url = upload_image(file_location_original, user_name, original_img_name)
+    sketch_url = upload_image(file_location_sketch, user_name, sketch_img_name)
 
     ## DB에 저장하기
     user = schemas.UserCreate
@@ -135,28 +138,26 @@ async def get_form(request: Request, db: Session = Depends(get_db)):
     user.sketch_img_height = sketch_img_height
     user.timestamp = timestamp
 
-    result = crud.create_user(db=db, user=user)
+    result = crud.create_user(db, user)
 
     original_location = os.path.join(IMG_DIR, os.path.join(user_name, original_img_name))
     sketch_location = os.path.join(IMG_DIR, os.path.join(user_name, sketch_img_name))
-    
+
     # cloud에 업로드
-    output_path = []
-    output_path = run_model(original_location, sketch_location, original_img_width, original_img_height)
-    
-    output_url = []    
+    output_path = integrated_pipeline(original_location, sketch_location, original_img_width, original_img_height)
+
+    output_url = []
     for output in range(0, 4):
         url = upload_image(os.path.join(output_path, "bedroom_upscaled_{}.png".format(output)), 
                             user_name, 
                             "output{}.png".format(output))
         output_url.append(str(url))
 
-
     output_img = str(output_url)
-    final_reault = crud.update_user(db=db, user_name=user_name, output_img = output_img)
+    final_result = crud.update_user(db, user_name, output_img)
 
     print("완료!")
-    
+
     send_email(email,
                 original_url, 
                 sketch_url, 
@@ -165,33 +166,26 @@ async def get_form(request: Request, db: Session = Depends(get_db)):
                 output_url[2],
                 output_url[3])
 
-
     # 폴더 삭제
     shutil.rmtree(user_dir)
     shutil.rmtree(output_path)
-    
-    return result
 
-def run_model(orignal_path: str, sketch_path: str, width: int, height: int):
-    output_path = []
-    output_path = integrated_pipeline(orignal_path, sketch_path, width, height)
-    return output_path
+    return final_result
 
-def upload_image(local_path:str, user_name:str, image_name:str):
+
+def upload_image(local_path: str, user_name: str, image_name: str) -> str:
     bucket = client.bucket('bucket-interior-storage')
     blob = bucket.blob(os.path.join(os.path.join('images/', user_name), image_name))
     blob.upload_from_filename(local_path)
-
     blob.make_public()
+    return blob.public_url
 
-    url = blob.public_url
-    return url
 
-def get_username(email):
-    name = email.split('@')
-    return name[0]
+def get_username(email: str) -> str:
+    return email.split('@')[0]
 
-def send_email(email,original,sketch,output_1,output_2,output_3,output_4):
+
+def send_email(email, original, sketch, output_1, output_2, output_3, output_4) -> None:
     msg = MIMEMultipart('alternative')
 
     email_sender=os.environ.get("EMAIL_SENDER")
@@ -202,21 +196,25 @@ def send_email(email,original,sketch,output_1,output_2,output_3,output_4):
     smtp_gmail.starttls()
     smtp_gmail.login(email_sender, email_password)
 
-    msg['Subject']="💌 내일의 집이 도착했습니다!"
-    msg['From']='버킷인테리어'
-    msg['To']=email
-    
-    html_file = open(os.path.join(TEMPLATE_DIR,'email.html'),"r")
-    temp = MIMEText((html_file.read()).format(original,
-                                    sketch, 
-                                    output_1,
-                                    output_2,
-                                    output_3,
-                                    output_4), 'html')
+    msg['Subject'] = "💌 내일의 집이 도착했습니다!"
+    msg['From'] = "버킷인테리어"
+    msg['To'] = email
 
-    msg.attach(temp)
+    html_file = open(os.path.join(TEMPLATE_DIR, 'email.html'), "r")
+    attachments = MIMEText((html_file.read()).format(
+            original,
+            sketch, 
+            output_1,
+            output_2,
+            output_3,
+            output_4
+        ),
+        'html'
+    )
 
-    smtp_gmail.send_message(msg,email_sender,email)
-    print("발송완료!")
+    msg.attach(attachments)
+
+    smtp_gmail.send_message(msg, email_sender, email)
+    print("발송 완료!")
+
     smtp_gmail.quit()
-
