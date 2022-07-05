@@ -36,9 +36,9 @@ Google Cloud Storage 인스턴스를 사전에 하나 준비해 주세요. 나�
 GPU가 준비된 서버에서 다음을 실행하면 됩니다.
 
 ```shell
-cd backend \
-poetry install \ # 의존성 패키지 설치
-poetry shell     # 가상환경 활성화
+cd backend
+poetry install # 의존성 패키지 설치
+poetry shell   # 가상 환경 활성화
 
 python3 -m app
 ```
